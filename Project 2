@@ -1,0 +1,47 @@
+# Read the csv file
+import pandas as pd
+df = pd.read_csv('Lottery_NY_Lotto_Winning_Numbers.csv')
+df
+#%%
+# Calculate the raw distribution of the gap for a specific number
+chosenNumber = 2
+def distributeGap(num):
+    gap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    count = 0
+    first = False
+    for i, row in df.iterrows():
+        numbers = row['Winning Numbers'].split()
+        numbers = [ele.lstrip('0') for ele in numbers]
+        #print(numbers)
+        number2 = str(row['Bonus #'])
+        #print(number2)
+        if first == False:
+            if num in numbers or number2 == num:
+                first = True
+                #print(count)
+        else:
+            if num in numbers or number2 == num:
+                #print(count)
+                if count >= 10:
+                    gap[10] += 1
+                else:
+                    gap[count] += 1
+                count = 0
+            else:
+                count += 1
+    return gap
+
+result = distributeGap(str(chosenNumber))
+result
+#%%
+# Calculate the percentage and print the result
+print('number = 2')
+print('Gap\t\tcount\t\tpercent')
+count = 0
+for i in result:
+    if count == 10:
+        print('≥' + str(count) + '\t\t' + str(i) + '\t\t' + str(round(i/sum(result), 4)))
+    else:
+        print(str(count) + '\t\t' + str(i) + '\t\t' + str(round(i/sum(result), 4)))
+    count += 1
+#%%

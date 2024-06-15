@@ -1,6 +1,6 @@
 # DS-in-Finance
-
-This Python project utilizes the turtle graphics library to visually demonstrate a simple linear regression model. Below is a summary of the code:
+## Project 1
+This project utilizes the turtle graphics library to visually demonstrate a simple linear regression model. Below is a summary of the code:
 
 1. Setup and Axis Drawing:
 - The project initializes the turtle graphics screen and sets the drawing speed to 'fastest'.
@@ -29,3 +29,26 @@ This Python project utilizes the turtle graphics library to visually demonstrate
 - The true model equation, fitted regression equation, and R square value are printed on the screen.
 
 At last, the turtle graphics window is closed using t.done().
+
+## Project 2
+This project analyzes the distribution of gaps between occurrences of a specific number in the New York Lottery winning numbers dataset. Below is a summary of the code:
+
+1. Read the CSV File:
+- The project reads a CSV file named Lottery_NY_Lotto_Winning_Numbers.csv using the pandas library.
+- The data is stored in a DataFrame named df.
+
+2. Calculate the Raw Distribution of the Gap for a Specific Number:
+- The chosen number for analysis is set to 2 (chosenNumber = 2).
+- A function distributeGap(num) is defined to calculate the distribution of gaps between occurrences of the chosen number.
+- Within the function:
+    - An array gap is initialized to store the counts of gaps of different lengths (0 to 10+).
+    - The function iterates through each row of the DataFrame to check if the chosen number appears in the 'Winning Numbers' or 'Bonus #' columns.
+    - If the chosen number is found, the count of the current gap length is incremented. Gaps longer than 10 are grouped into the 10+ category.
+- The result of the gap distribution is stored in the variable result.
+
+3. Calculate the Percentage and Print the Result:
+- The project prints the gap distribution along with the percentage of each gap length.
+- It prints the header: "number = 2", followed by the column titles "Gap", "count", and "percent".
+- For each gap length in the result array, it prints the gap length, the count of occurrences, and the percentage (rounded to four decimal places).
+
+Finally, the project outputs the distribution of gaps for the number 2, showing how frequently different gap lengths occur in the lottery data.

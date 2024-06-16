@@ -91,3 +91,35 @@ This project analyzes term life insurance data to explore the relationship betwe
 8. Predictive Analysis:
 - The project makes a prediction based on the regression model for a specific set of input values.
 - The prediction and the regression coefficients are printed.
+
+## Project 4
+This project performs non-linear regression using gradient descent to fit a model to a dataset containing x and y values. Below is a summary of the project:
+
+1. Reading the CSV File:
+- The project reads a CSV file named data.csv using the pandas library.
+- The data is stored in a DataFrame named df.
+- The x and y values are extracted and converted to float32 type arrays.
+
+2. Initializing Parameters:
+- The regression parameters (beta) and their initial update values are initialized to arrays of zeros and 0.1s, respectively.
+- A small learning rate (rate) is set to 0.00005.
+
+3. Defining Error and Gradient Calculation Functions:
+- calculateE(beta, X, y): Computes the error (sum of squared differences) between the actual y values and the predicted values using the current beta parameters.
+- calculateF(beta, X, y): Computes the gradient of the error function with respect to the beta parameters.
+
+4. Gradient Descent Optimization:
+- The project iterates 10,000 times to update the beta parameters using gradient descent.
+- In each iteration, the current error is appended to the RSS list, the beta parameters are updated, and the gradient is recalculated.
+
+5. Printing Results:
+- The smallest loss achieved during the optimization.
+- The learning rate used.
+- The final estimated beta parameters.
+- The number of updates performed.
+
+6. Plotting the Results:
+- A scatter plot of the original x and y values.
+- A plot of the true function y = 2 * np.sin(0.5*X - 3) + 0.1 * X.
+- A plot of the fitted function using the estimated beta parameters.
+- A plot of the loss (error) over the number of updates to visualize the convergence of the optimization.

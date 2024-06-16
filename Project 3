@@ -1,0 +1,100 @@
+import pandas as pd
+df = pd.read_csv('TermLifeData.csv')
+df
+#%%
+df_filtered = df[df['FACE'] >= 50000]
+df_filtered
+#%%
+# [a]
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import PowerTransformer
+#df['FACE'].plot(kind='hist')
+
+pt = PowerTransformer(copy=True, method='box-cox', standardize = False)
+#afterTransFace = pt.fit_transform(df[['FACE']])
+df_filtered['FACEbc'] = pt.fit_transform(df_filtered[['FACE']])
+#df['transFACE'].plot(kind='hist')
+
+fig, axes = plt.subplots(1, 2)
+df_filtered['FACE'].hist(ax=axes[0])
+df_filtered['FACEbc'].hist(ax=axes[1])
+#%%
+
+#%%
+import numpy as np
+from numpy import log as ln
+FACEbc = df_filtered.drop(['FACE'], axis = 1)
+FACEbc['FACEbc'] = df_filtered['FACEbc']
+FACEbc['INCOME']= ln(FACEbc['INCOME'])
+FACEbc['MAR0']= FACEbc['MARSTAT']
+FACEbc['MAR0'] = np.where(FACEbc['MAR0'] == 0, 1, 0)
+FACEbc['MAR2']= FACEbc['MARSTAT']
+FACEbc['MAR2'] = np.where(FACEbc['MAR2'] == 2, 1, 0)
+FACEbc.head(15)
+#%%
+# [b]
+import numpy as np
+
+y = df_filtered['FACEbc'].to_numpy()
+x = df_filtered.to_numpy()
+from sklearn.linear_model import LinearRegression
+reg = LinearRegression()
+result = reg.fit(FACEbc[['EDUCATION', 'NUMHH', 'INCOME', 'MAR0', 'MAR2']], FACEbc['FACEbc'])
+print('intercept: ' + str(reg.intercept_))
+print('coefficent: ' + str(reg.coef_))
+#%%
+beta = np.array([reg.coef_[0], reg.coef_[1],reg.coef_[2],reg.coef_[3],reg.coef_[4]]).reshape(5, 1)
+#print(beta)
+x = FACEbc[['EDUCATION', 'NUMHH', 'INCOME', 'MAR0', 'MAR2']].to_numpy().reshape(213, 5)
+#print(x)
+#%%
+#R_sqaure; sigma_hat
+import math
+fitted_y = np.matmul(x, beta) + np.full((213, 1), reg.intercept_)
+y_bar = sum(fitted_y)/len(fitted_y)
+n = len(FACEbc)
+p = 5
+y_matrix_t = FACEbc[['FACEbc']].to_numpy().reshape(1, 213)
+y_matrix = FACEbc[['FACEbc']].to_numpy().reshape(213, 1)
+fitted_y_matrix_t = fitted_y.reshape(1, 213)
+fitted_y_matrix = fitted_y.reshape(213, 1)
+TSS = np.matmul(y_matrix_t, y_matrix) - n * (y_bar ** 2)
+ESS = np.matmul(y_matrix_t, y_matrix) - np.matmul(y_matrix_t, fitted_y_matrix)
+RSS = np.matmul(fitted_y_matrix_t, fitted_y_matrix) - n * (y_bar ** 2)
+print(RSS); print(TSS); print(ESS)
+R_sqaure = RSS/TSS
+sigma_square = ESS/(n-p-1)
+sigma_hat = math.sqrt(sigma_square)
+print(R_sqaure); print(sigma_hat)
+#%%
+#[c]
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+from scipy import stats
+#Full
+model = ols('FACEbc ~ EDUCATION + NUMHH + INCOME + MAR0 + MAR2', FACEbc).fit()
+print(model.summary())
+aov_table = sm.stats.anova_lm(model, typ=2)
+print(aov_table)
+#%%
+#[c]
+import statsmodels.api as sm
+from scipy import stats
+X2 = sm.add_constant(x)
+est = sm.OLS(y, X2)
+est2 = est.fit()
+print(est2.summary())
+#%%
+# [b & c]
+print('R2 = 1')
+print('F = 6.790e+20')
+print('critical value: 0.05')
+print('H0 is fail to rejected')
+#%%
+# [d]
+# FACEbc = β0 + β1EDUCATION + β2NUMHH + β3 ln(INCOME) + β4MAR0 + β5MAR2 + e
+
+pred = 4.2170313639659565 + 3.22*16 + 3.691*4 + 9.194*np.log(120000) + 0 + 1*2
+print('Prediction Amount: ' + str(pred))
+print('Prediction interval: '+ str(reg.coef_))
+#%%

@@ -52,3 +52,42 @@ This project analyzes the distribution of gaps between occurrences of a specific
 - For each gap length in the result array, it prints the gap length, the count of occurrences, and the percentage (rounded to four decimal places).
 
 Finally, the project outputs the distribution of gaps for the number 2, showing how frequently different gap lengths occur in the lottery data.
+
+## Project 3
+This project analyzes term life insurance data to explore the relationship between various factors and the policy face value (FACE) using linear regression and transformation techniques. Below is a summary of the project:
+
+1. Reading the CSV File:
+- The project reads a CSV file named TermLifeData.csv using the pandas library.
+- The data is stored in a DataFrame named df.
+
+2.  Filtering Data:
+- The data is filtered to include only rows where the FACE value is greater than or equal to 50,000.
+- The filtered data is stored in df_filtered.
+
+3. Box-Cox Transformation:
+- The FACE values in the filtered data are transformed using the Box-Cox method to normalize the distribution.
+- The transformed values are stored in a new column FACEbc.
+- The project creates histograms to visualize the distribution of FACE before and after transformation.
+
+4. Data Preparation:
+- The project prepares the data for regression analysis by creating new columns:
+    - INCOME is transformed using the natural logarithm.
+    - MAR0 is a binary variable indicating whether MARSTAT is 0.
+    - MAR2 is a binary variable indicating whether MARSTAT is 2.
+
+5. Linear Regression Analysis:
+- The project performs a linear regression analysis to model the relationship between FACEbc and the predictor variables (EDUCATION, NUMHH, INCOME, MAR0, MAR2).
+- The intercept and coefficients of the regression model are printed.
+
+6. Regression Diagnostics:
+- The project calculates various regression diagnostics including:
+    - 𝑅^2(coefficient of determination)
+    - Residual standard error (sigma_hat)
+
+7. Statistical Analysis with Statsmodels:
+- The project uses the statsmodels library to perform a detailed statistical analysis and ANOVA (Analysis of Variance).
+- The summary of the regression model and the ANOVA table are printed.
+
+8. Predictive Analysis:
+- The project makes a prediction based on the regression model for a specific set of input values.
+- The prediction and the regression coefficients are printed.

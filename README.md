@@ -1,6 +1,8 @@
 # DS in Finance and Insurance
 
-## Final Projecct: Comprehensive Housing Price Prediction in Daegu Using Machine Learning Models
+## Final Projecct: Comprehensive Housing Price Prediction in Daegu Using Machine Learning Models Summary
+
+(See detail in project report)
 
 ### Introduction
 The primary objective of this project was to analyze and predict apartment prices in Daegu, South Korea, over a decade (2007-2017). With economic and population growth, the fluctuation in housing prices has become a significant concern. The dataset comprises 1.4 million observations with 29 potential factors influencing housing prices.

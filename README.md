@@ -1,5 +1,38 @@
-# DS-in-Finance
-## Project 1
+# DS in Finance and Insurance
+
+## Final Projecct: Comprehensive Housing Price Prediction in Daegu Using Machine Learning Models
+
+### Introduction
+The primary objective of this project was to analyze and predict apartment prices in Daegu, South Korea, over a decade (2007-2017). With economic and population growth, the fluctuation in housing prices has become a significant concern. The dataset comprises 1.4 million observations with 29 potential factors influencing housing prices.
+
+### Data Import and Structure
+The dataset was loaded into Python using the read.csv() function and analyzed for structure and dimensions. It contained 5891 observations and 30 variables, including integers, objects, and floats. The variables ranged from sale prices and construction year to the number of nearby facilities and the type of heating system.
+
+### Data Cleaning and Feature Selection
+Initial analysis showed no missing values in the dataset. Categorical variables were converted to numerical values for analysis. A heat map was used to visualize correlations, identifying key features such as apartment size and nearby facilities that significantly influence housing prices.
+
+### Model Development
+The project employed various machine learning models to predict housing prices, including:
+- Linear Regression: Initial attempts with linear regression revealed a high RMSE, suggesting the presence of outliers.
+- Outlier Analysis: Outliers were identified and removed, slightly improving the RMSE.
+- Feature Importance: Analysis indicated that some features, like the number of elevators and parking spaces, had high coefficients due to correlations with other variables.
+
+### Optimization and Comparison of Models
+Further optimization was done using the Gradient Boosting Regressor, significantly improving model performance. The following models were developed and compared based on RMSE and R² values:
+- Linear Regression: Had the highest RMSE.
+- K-Nearest Neighbors (KNN): Performed better than linear regression.
+- Lasso Regression and Ridge Regression: Showed similar performance to linear regression.
+- Decision Tree and Random Forest: These non-linear models outperformed the others, with lower RMSE and higher R² values.
+
+### Final Results 
+The decision tree and random forest models were found to be the most effective, providing the best balance between accuracy and complexity. Feature importance analysis revealed that apartment size, year sold, year built, and nearby facilities were the most influential factors in determining housing prices.
+
+### Conclusion
+This project successfully demonstrated a comprehensive approach to housing price prediction using various machine learning models. The findings provide valuable insights into the factors affecting housing prices and the effectiveness of different predictive models. The methodology and code can be adapted for similar analyses in other regions or with other datasets, making it a versatile tool for real estate analytics.
+
+## Other Class Project
+
+## Unit 1
 This project utilizes the turtle graphics library to visually demonstrate a simple linear regression model. Below is a summary of the code:
 
 1. Setup and Axis Drawing:
@@ -30,7 +63,7 @@ This project utilizes the turtle graphics library to visually demonstrate a simp
 
 At last, the turtle graphics window is closed using t.done().
 
-## Project 2
+## Unit 2
 This project analyzes the distribution of gaps between occurrences of a specific number in the New York Lottery winning numbers dataset. Below is a summary of the code:
 
 1. Read the CSV File:
@@ -53,7 +86,7 @@ This project analyzes the distribution of gaps between occurrences of a specific
 
 Finally, the project outputs the distribution of gaps for the number 2, showing how frequently different gap lengths occur in the lottery data.
 
-## Project 3
+## Unit 3
 This project analyzes term life insurance data to explore the relationship between various factors and the policy face value (FACE) using linear regression and transformation techniques. Below is a summary of the project:
 
 1. Reading the CSV File:
@@ -92,7 +125,7 @@ This project analyzes term life insurance data to explore the relationship betwe
 - The project makes a prediction based on the regression model for a specific set of input values.
 - The prediction and the regression coefficients are printed.
 
-## Project 4
+## Unit 4
 This project performs non-linear regression using gradient descent to fit a model to a dataset containing x and y values. Below is a summary of the project:
 
 1. Reading the CSV File:
